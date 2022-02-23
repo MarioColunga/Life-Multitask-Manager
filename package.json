@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/MarioColunga/Life-Multitask-Manager#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "sequelize": "^6.16.2"
   }
 }
