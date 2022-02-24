@@ -1,0 +1,25 @@
+{
+  "name": "life-multitask-manager",
+  "version": "1.0.0",
+  "description": "A plataform to schedule and track tasks and project divided into categories",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarioColunga/Life-Multitask-Manager.git"
+  },
+  "author": "Jorge Bernal, Mario Colunga, Marco Gonzalez, Mariana Gonzalez, Daniel Moreno",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MarioColunga/Life-Multitask-Manager/issues"
+  },
+  "homepage": "https://github.com/MarioColunga/Life-Multitask-Manager#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "jshint": "^2.13.4",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.16.2"
+  }
+}
