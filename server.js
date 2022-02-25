@@ -1,20 +1,37 @@
 const express = require('express');
-const path = require('path')
+// Import and require mysql2
+const mysql = require('mysql2');
 
+const PORT = process.env.PORT || 3001;
 const app = express();
-const PORT = 3001;
 
-app.use(express.static('files'))
+// Express middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-app.get('/',(req,res) =>
-res.send('Navigate')
+// Connect to database
+const db = mysql.createConnection(
+  {
+    host: 'localhost',
+    // MySQL username,
+    user: 'root',
+    // MySQL password
+    password: '12345678*',
+    database: 'db_project'
+  },
+  console.log(`Connected to the db_project.`)
 );
 
+// Query database
+db.query('SELECT * FROM dataproject', function (err, results) {
+  console.log(results);
+});
 
-app.listen(PORT,() =>
-console.log(`app listening at http://localhost:${PORT}`)
-);
+// Default response for any other request (Not Found)
+app.use((req, res) => {
+  res.status(404).end();
+});
 
-
-
-console.log('creating API')
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
