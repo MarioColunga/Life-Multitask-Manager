@@ -21,5 +21,8 @@
     "jshint": "^2.13.4",
     "mysql": "^2.18.1",
     "sequelize": "^6.16.2"
+  },
+  "devDependencies": {
+    "prettier": "2.5.1"
   }
 }
