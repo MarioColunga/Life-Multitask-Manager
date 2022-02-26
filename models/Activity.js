@@ -13,6 +13,13 @@ Activity.init(
         primaryKey: true,
         autoIncrement: true
     },
+    projectId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model:"Project",
+            key: "projectId"
+        }
+    },
     activityName: {
       type: DataTypes.STRING
     },

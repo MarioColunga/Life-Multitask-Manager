@@ -13,14 +13,19 @@ Project.init(
       primaryKey: true,
       autoIncrement: true
     },
+    
     projectName: {
       type: DataTypes.STRING
     },
     projectDescription: {
       type: DataTypes.STRING
     },
-    userId: {
-      type: DataTypes.STRING
+    userId: { 
+      type: DataTypes.INTEGER,
+      references: {
+          model:"Profile",
+          key: "userId"
+      }
     },
     deadLine: {
       type: DataTypes.DATE
