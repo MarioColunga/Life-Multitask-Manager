@@ -1,21 +1,18 @@
 const router = require('express').Router();
 
-// Import the model
-const Profile = require('./Profile');
-
+const Profile = require('../../models/Profile');
 // CREATE a book
 router.post('/', (req, res) => {
-  // Use Sequelize's `create()` method to add a row to the table
-  // Similar to `INSERT INTO` in plain SQL
+  
   Profile.create({
     Nombre: req.body.Nombre,
     LastName: req.body.LastName,
     email: req.body.email,
     UserPassword: req.body.UserPassword
   })
-    .then((newProfile) => {
+    .then((newBook) => {
       // Send the newly created row as a JSON object
-      res.json(newProfile);
+      res.json(newBook);
     })
     .catch((err) => {
       res.json(err);

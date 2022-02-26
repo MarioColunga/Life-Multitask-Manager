@@ -1,10 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('./config/connection');
+const sequelize = require('../config/connection');
 
 // Create a new Sequelize model for books
-class Profile extends Model {}
+class Book extends Model {}
 
-Profile.init(
+Book.init(
   // Define fields/columns on model
   // An `id` is automatically created by Sequelize, though best practice would be to define the primary key ourselves
   {
@@ -37,4 +37,4 @@ Profile.init(
   }
 );
 
-module.exports = Profile;
+module.exports = Book;
