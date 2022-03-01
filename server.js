@@ -1,20 +1,16 @@
 const express = require('express');
-const path = require('path')
+const routes = require('./routes');
+const sequelize = require('./config/connection');
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
-app.use(express.static('files'))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/',(req,res) =>
-res.send('Navigate')
-);
+app.use(routes);
 
-
-app.listen(PORT,() =>
-console.log(`app listening at http://localhost:${PORT}`)
-);
-
-
-
-console.log('creating API')
+// Connect to database
+sequelize.sync({ force: false }).then(() => {
+  app.listen(PORT, () => console.log('Now listening'))
+}); 
