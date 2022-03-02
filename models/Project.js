@@ -2,28 +2,33 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 // Create a new Sequelize model for books
-class Profile extends Model {}
+class Project extends Model {}
 
-Profile.init(
+Project.init(
   // Define fields/columns on model
   // An `id` is automatically created by Sequelize, though best practice would be to define the primary key ourselves
   {
-    userId: {
+    projectId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    userName: {
+    
+    projectName: {
       type: DataTypes.STRING
     },
-    lastName: {
+    projectDescription: {
       type: DataTypes.STRING
     },
-    email: {
-      type: DataTypes.STRING
+    userId: { 
+      type: DataTypes.INTEGER,
+      references: {
+          model:"Profile",
+          key: "userId"
+      }
     },
-    userPassword: {
-      type: DataTypes.STRING
+    deadLine: {
+      type: DataTypes.DATE
     },
   },
   {
@@ -33,8 +38,8 @@ Profile.init(
     timestamps: false,
     freezeTableName: true,
     underscored: false,
-    modelName: 'profile'
+    modelName: 'project'
   }
 );
 
-module.exports = Profile;
+module.exports = Project;
