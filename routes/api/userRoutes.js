@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { User } = require("../../models/User");
+const { async } = require("jshint/src/prod-params");
+const User = require("../../models/User");
 
 router.post("/", async (req, res) => {
   try {
@@ -55,6 +56,23 @@ router.post("/logout", (req, res) => {
   } else {
     res.status(404).end();
   }
+});
+
+router.post("/signup", async (req, res) => {
+  console.log(req.body);
+  // User.create({
+  //   userName: req.body.userName,
+  //   lastName: req.body.lastName,
+  //   email: req.body.email,
+  //   userPassword: req.body.userPassword,
+  // })
+  //   .then((newProfile) => {
+  //     // Send the newly created row as a JSON object
+  //     res.json(newProfile);
+  //   })
+  //   .catch((err) => {
+  //     res.json(err);
+  //   });
 });
 
 module.exports = router;

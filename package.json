@@ -4,7 +4,8 @@
   "description": "A plataform to schedule and track tasks and project divided into categories",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "node index.js",
+    "lint": "npx eslint **/*.js"
   },
   "repository": {
     "type": "git",
@@ -21,9 +22,12 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-handlebars": "^6.0.2",
-    "jshint": "^2.13.4",
-    "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "sequelize": "^6.16.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^6.15.0",
+    "prettier": "^2.1.2"
   }
 }

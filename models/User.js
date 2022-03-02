@@ -10,17 +10,21 @@ class User extends Model {
 
 User.init(
   {
-    id: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    userName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
+    userLastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    userEmail: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -28,7 +32,7 @@ User.init(
         isEmail: true,
       },
     },
-    password: {
+    userPassword: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
