@@ -1,8 +1,8 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const Profile = require('../../models/Profile');
+const Profile = require("../../models/Profile");
 
-router.put('/:userId', (req, res) => {
+router.put("/:userId", (req, res) => {
   //Calls the update method on the Book model
   Profile.update(
     {
@@ -10,7 +10,7 @@ router.put('/:userId', (req, res) => {
       userName: req.body.userName,
       lastName: req.body.lastName,
       email: req.body.email,
-      userPassword: req.body.userPassword
+      userPassword: req.body.userPassword,
     },
     {
       // Gets a book based on the book_id given in the request parameters
@@ -29,7 +29,7 @@ router.put('/:userId', (req, res) => {
 });
 
 // Delete route for a book with a matching book_id
-router.delete('/:userId', (req, res) => {
+router.delete("/:userId", (req, res) => {
   // Looks for the books based book_id given in the request parameters
   Profile.destroy({
     where: {
@@ -42,23 +42,21 @@ router.delete('/:userId', (req, res) => {
     .catch((err) => res.json(err));
 });
 
-
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   // Get all books from the book table
   Profile.findAll().then((profileData) => {
     res.json(profileData);
   });
 });
 
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
+  console.log(req.body);
 
-  console.log(req.body)
-  
   Profile.create({
     userName: req.body.userName,
     lastName: req.body.lastName,
     email: req.body.email,
-    userPassword: req.body.userPassword
+    userPassword: req.body.userPassword,
   })
     .then((newProfile) => {
       // Send the newly created row as a JSON object
@@ -70,19 +68,19 @@ router.post('/', (req, res) => {
 });
 
 // CREATE multiple profile
-router.post('/seed', (req, res) => {
+router.post("/seed", (req, res) => {
   // Multiple rows can be created with `bulkCreate()` and an array
   // This could also be moved to a separate Node.js script to ensure it only happens once
   Profile.bulkCreate([
     {
-      userName: 'Mario',
-      lastName: 'Colunga',
-      email: 'mario_a71@hotmail.com',
-      userPassword: 'rrjvnjweerjnjev',
+      userName: "Mario",
+      lastName: "Colunga",
+      email: "mario_a71@hotmail.com",
+      userPassword: "rrjvnjweerjnjev",
     },
   ])
     .then(() => {
-      res.send('Database seeded!');
+      res.send("Database seeded!");
     })
     .catch((err) => {
       res.json(err);

@@ -5,6 +5,7 @@ dist
 .env.local
 .env.*.local
 .env
+env
 
 # Log files
 npm-debug.log*
@@ -13,3 +14,5 @@ yarn-error.log*
 
 # Editor directories and files
 .vscode
+.DS_Store
+.package-lock.json
