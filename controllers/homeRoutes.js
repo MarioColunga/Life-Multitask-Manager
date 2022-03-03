@@ -64,6 +64,7 @@ router.get('/login', (req, res) => {
 
 router.get('*', (req, res) => {
   res.render("404");
+  res.status(404);
 });
 
 module.exports = router;
