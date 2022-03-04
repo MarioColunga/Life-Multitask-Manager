@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="/css/calendar.css" />
+<div class="container-calendar">
+  <div class="todo-grid-parent">
+    <div>
+      {{!--       ADD NEW TASK     --}}
+      <div class="todo-input todo-block">
+        <span>Task Title: </span>
+        <div class="form-floating signUp">
+          <input type="text" class="form-control" id="titleTask" placeholder="Enter new task">
+          <label for="floatingInput">Enter new task</label>
+        </div>
+        <span>Category: </span>
+        <select class="form-select" id="categoryList" list="categoryList" aria-label="Select category">
+          <option selected>Select category</option>
+          <option value="Personal">Personal</option>
+          <option value="Work">Work</option>
+          <option value="Doctor">Doctor</option>
+        </select>
+        <span>Start Date:</span>
+        <input type="date" id="startDate" onkeydown="return false" >
+        <span>Time:</span>
+        <input type="time" id="startTime">
+        <span></span>
+        <button id="addTaskBtn">Add</button>
+      </div>
+      {{!-- TABLE WITH ALL TASK --}}
+      <div class="todo-block todoTable-block">
+        <div class="itemsPerPage">
+          <span>Show Items</span>
+          <select id="itemsPerPageSelectElem">
+            <option>5</option>
+            <option>10</option>
+            <option>20</option>
+          </select>
+        </div>
+        <table id="todoTable">
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Task Title</th>
+            <th>
+              <select class="form-select" id="categoryFilter" list="categoryFilter" aria-label="Select category">
+              </select>
+            </th>
+          </tr>
+        </table>
+        <div class="pagination-pages">
+        </div>
+        <button id="sortTaskBtn">Sort Task by Date</button>
+      </div>
+    </div>
+    {{!-- CALENDAR --}}
+    <div class="todo-calendar  todo-block">
+      <div id='calendar'></div>
+    </div>
+    <br/>
+  </div>
+  
+  {{!-- EDIT TASK MODAL --}}
+  <div class="todo-overlay" id="todo-overlay">
+    <div class="todo-modal" id="todo-modal">
+      <div class="todo-input todo-block">
+        <span>Task Title: </span>
+        <div class="form-floating signUp">
+          <input type="text" class="form-control" id="todo-edit-todo" placeholder="Enter new task">
+          <label for="floatingInput">Enter new task</label>
+        </div>
+        <span>Category: </span>
+        <select class="form-select" id="todo-edit-category" list="categoryList" aria-label="Select category">
+          <option selected>Select category</option>
+          <option value="Personal">Personal</option>
+          <option value="Work">Work</option>
+          <option value="Doctor">Doctor</option>
+        </select>
+        <span>Start Date:</span>
+        <input type="date" id="todo-edit-date" onkeydown="return false" >
+        <span>Time:</span>
+        <input type="time" id="todo-edit-time">
+        <span></span>
+        <button id="saveChangesBtn">Save Changes</button>
+      </div>
+    </div>
+    <div class="todo-modal-close-btn" id="todo-modal-close-btn">X</div>
+  </div>
+</div>
+<script src="/js/calendar.js"></script>

@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Rowdies&family=Titillium+Web&display=swap');
+
+.container-calendar {
+  padding: 40px;
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 0%, #80aed0 100%);
+}
+
+td {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+th {
+  color: #0093e9;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.todo-input {
+  background-color: #80aed0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1rem;
+}
+
+.todoTable-block {
+  margin-top: 1rem;
+}
+
+.pagination-pages {
+  color: #0094e9b3;
+  text-align: right;
+}
+
+.pagination-pages > * {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.modifyTask {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.todo-block {
+  background-color: white;
+  border: 1px solid #80aed0;
+  padding: 1rem;
+  border-radius: 20px;
+  color: #0a0b0bb3;
+}
+
+@media screen and (max-width: 767px) {
+  /* for mobile or small screen device */
+  #todoTable,
+  .todo-calendar {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  /* for tablets or laptops or desktops */
+  .todo-grid-parent {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    column-gap: 1rem;
+  }
+
+  #calendar {
+    position: sticky;
+    top: 0;
+  }
+}
+
+.todo-overlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: #ddd;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(-100vw);
+  transition: transform 250ms;
+  z-index: 2;
+}
+
+.todo-modal {
+  min-width: 50vw;
+  height: 50vh;
+  background-color: #80aed0;
+}
+
+.todo-modal-close-btn {
+  background-color: #0094e9b3;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+}
+
+.slidedIntoView {
+  transform: translateX(0);
+  transition: transform 650ms;
+}
+
+#todoTable tr:nth-child(even) {
+  background-color: #b6cee1;
+}
+
+button {
+  border-radius: 20px;
+  border: 1px solid #0093e9;
+  background-color: #0093e9;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:focus {
+  outline: none;
+}
+
+button.ghost {
+  background-color: transparent;
+  border-color: #ffffff;
+}
+
+.chevron {
+  transform: translateY(0.4rem);
+}
+
+.itemsPerPage {
+  text-align: right;
+  margin-bottom: 0.5rem;
+  color: #0094e9b3;
+}
+
+footer {
+  background-color: #222;
+  color: #fff;
+  font-size: 14px;
+  bottom: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 1;
+}
+
+footer p {
+  margin: 10px;
+}

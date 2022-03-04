@@ -1,4 +1,20 @@
+<<<<<<< HEAD
+body {
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 0%, #80aed0 100%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+  height: 100vh;
+  margin: -20px 0 50px;
+}
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+=======
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+>>>>>>> origin
 
 p {
   font-weight: 100;

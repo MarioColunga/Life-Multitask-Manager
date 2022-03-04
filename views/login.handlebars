@@ -3,25 +3,44 @@
 <div>
   <div class="container" id="container">
     <div class="form-container sign-up-container">
-      <form action="#">
-        <input id="userName" type="text" placeholder="Name" />
-        <input id="userLastName" type="text" placeholder="Last name" />
-        <input id="userEmail" type="email" placeholder="Email" />
-        <input id="userPassword" type="password" placeholder="Password" />
-        <input
-          id="userConfirmPassword"
-          type="password"
-          placeholder="Confirm password"
-        />
-        <button id="sign-up">Sign Up</button>
+      <form >
+        <div class="form-floating">
+          <input type="text" class="form-control signUp" id="userName" placeholder="Name">
+          <label for="floatingInput">Name</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control signUp" id="userLastName" placeholder="Last Name">
+          <label for="floatingInput">Last Name</label>
+        </div>
+        <div class="form-floating">
+          <input type="email" class="form-control signUp" id="userEmailSignUp" placeholder="Email">
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control signUp" id="userPasswordSignUp" placeholder="Password">
+          <label for="floatingPasswordInput">Password</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control signUp" id="confirmPassword" placeholder="Password again">
+          <label for="confirmFloatingPasswordInput">Confirm Password</label>
+        </div>
+        <button type="button" id="sign-up" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Sign Up
+        </button>
       </form>
     </div>
 
     <div class="form-container sign-in-container">
       <form action="#">
         <h1>Sign in</h1>
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
+        <div class="form-floating">
+          <input type="email" class="form-control" id="emalUser" placeholder="name@example.com">
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="passwordUser" placeholder="Password">
+          <label for="floatingPassword">Password</label>
+        </div>
         <button>Sign In</button>
       </form>
     </div>
@@ -34,9 +53,9 @@
         </div>
 
         <div class="overlay-panel overlay-right">
-          <h1>You dont have a user?</h1>
+          <h1>You don't have a user?</h1>
           <p>
-            Enter your personal details and start journey with Life Multitask
+            Enter your personal details and start a journey with Life Multitask
             Makager
           </p>
           <button class="ghost" id="signUp">Sign Up</button>
