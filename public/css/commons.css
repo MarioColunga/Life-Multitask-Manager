@@ -16,7 +16,7 @@
 
 body {
     background-color: var(--main-site-color);
-    background-image: linear-gradient(160deg, var(--main-site-color) 0%, #80aed0 100%);
+    background-image: linear-gradient(160deg, var(--main-site-color) 0%, var(--secondary-site-color) 100%);
   
     display: flex;
     justify-content: center;
