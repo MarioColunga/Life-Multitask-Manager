@@ -59,10 +59,10 @@ router.post('/', (req, res) => {
   console.log(req.body)
   
   Activity.create({
-    activityId: req.body.activityId,
+    projectId: req.body.projectId,    
     activityName: req.body.activityName,
     activityDescription: req.body.activityDescription,
-    activitydeadLine: req.body.activitydeadLine,
+    activitydeadLine: req.body.activityDeadLine,
     startHour: req.body.startHour,
     endHour: req.body.endHour
     

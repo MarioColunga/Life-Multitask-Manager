@@ -1,25 +1,23 @@
-const signUpButton = document.getElementById('signUp');
-const container = document.getElementById('container');
+document.getElementById('saveActivity').addEventListener('click', saveActivity);
 
-signUpButton.addEventListener('click', () => {
-  container.classList.add('right-panel-active');
-});
-
-function handleError() {}
-
-async function signUpHandler(event) {
+async function saveActivity(){
   event.preventDefault();
-  const userName = document.getElementById('userName').value.trim();
-  const userLastName = document.getElementById('userLastName').value.trim();
-  const userEmail = document.getElementById('userEmail').value.trim();
-  const userPassword = document.getElementById('userPassword').value.trim();
+  console.log('Into saveActivity');
+  
+  const projectId = document.getElementById('projectId').innerHTML;
+  const activityName = document.getElementById('inputActivityName').value.trim();
+  const activityDescription = document.getElementById('inputActivityDescription').value.trim();  
+  const activityDeadLine = document.getElementById('inputActivityDeadLine').value.trim();
+  const startHour = document.getElementById('inputStartHour').value.trim();
+  const endHour = document.getElementById('inputEndHour').value.trim();
 
-  // if (name && email && password) {
-  const response = await fetch('/api/users/signup', {
-    method: 'POST',
-    body: JSON.stringify({ userName, userLastName, userEmail, userPassword }),
-    headers: { 'Content-Type': 'application/json' },
-  });
+  if (projectId && activityName && activityDescription && activityDeadLine && startHour && endHour) {
+    //const response = await fetch('/api/users/saveProject', {
+    const response = await fetch('/api/activities/', {
+      method: 'POST',
+      body: JSON.stringify({ projectId,activityName,activityDescription,activityDeadLine,startHour,endHour }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+  
 }
-
-document.getElementById('sign-up').addEventListener('click', signUpHandler);

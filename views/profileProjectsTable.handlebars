@@ -1,0 +1,21 @@
+<!-- Loop over each object in the projects array -->
+<table class="table" style="margin:15px;">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Project Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each projects as |project| }}
+    <tr>
+      <th scope="row">{{project.projectId}}</th>
+      <td>{{project.projectName}}</td>
+      <td>{{project.projectDescription}}</td>
+      <td>Read <a href="/activitieFormRender/{{project.projectId}}">Add</a> Delete</td>
+    </tr>
+   {{/each}} 
+  </tbody>
+</table>

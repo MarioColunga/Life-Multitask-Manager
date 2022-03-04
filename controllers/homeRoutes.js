@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/projectRender', async (req, res) => {
+router.get('/projectFormRender', async (req, res) => {
   try {
     res.render('projectForm');
   } catch (err) {
@@ -20,7 +20,29 @@ router.get('/projectRender', async (req, res) => {
   }
 });
 
-router.get('/activitiesRender', async (req, res) => { 
+router.get('/activitieFormRender/:projectId', async (req, res) => {
+  try {
+    //Get project with projectId
+    const projectData = await Project.findAll({      
+      where: {
+        projectId: req.params.projectId,
+      }    
+    });
+    const projectDataPlain = projectData.map((project) => project.get({ plain: true }));   
+    //console.log('projectDataPlain',projectDataPlain);
+    //console.log('projectData',projectData);
+    
+    const projects= [{projectId: req.params.projectId, projectName: `${projectDataPlain[0].projectName}`},];
+    //console.log('projects plain',projects)
+    res.render('activitiesForm',{
+      projects
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/projectTableRender', async (req, res) => { 
   try {
     // Get all projects and JOIN with user data
     const projectData = await Project.findAll();
@@ -34,7 +56,7 @@ router.get('/activitiesRender', async (req, res) => {
   
 });
 
-router.get('/profileActivitiesRender/:profileId', async (req, res) => { 
+router.get('/profileProjectTableRender/:profileId', async (req, res) => { 
   try {
     // Get all projects and JOIN with profile data
     const projectData = await Project.findAll({      
@@ -46,8 +68,9 @@ router.get('/profileActivitiesRender/:profileId', async (req, res) => {
     //console.log('projectData',projectData);
 
     const projects = projectData.map((project) => project.get({ plain: true }));   
+    console.log('projects',projects);
 
-    res.render('activitiesForm',{
+    res.render('profileProjectsTable',{
       projects
     });
   } catch (err) {
