@@ -1,68 +1,106 @@
-
-<link rel="stylesheet" href="/css/login.css" />
+<link rel='stylesheet' href='/css/login.css' />
 <div>
-  <div class="container" id="container">
-    <div class="form-container sign-up-container">
-      <form >
-        <div class="form-floating">
-          <input type="text" class="form-control signUp" id="userName" placeholder="Name">
-          <label for="floatingInput">Name</label>
+  <div class='container' id='container'>
+    <div class='form-container sign-up-container'>
+      <form>
+        <div class='form-floating'>
+          <input
+            type='text'
+            class='form-control signUp'
+            id='userName'
+            placeholder='Name'
+          />
+          <label for='floatingInput'>Name</label>
         </div>
-        <div class="form-floating">
-          <input type="text" class="form-control signUp" id="userLastName" placeholder="Last Name">
-          <label for="floatingInput">Last Name</label>
+        <div class='form-floating'>
+          <input
+            type='text'
+            class='form-control signUp'
+            id='userLastName'
+            placeholder='Last Name'
+          />
+          <label for='floatingInput'>Last Name</label>
         </div>
-        <div class="form-floating">
-          <input type="email" class="form-control signUp" id="userEmailSignUp" placeholder="Email">
-          <label for="floatingInput">Email address</label>
+        <div class='form-floating'>
+          <input
+            type='email'
+            class='form-control signUp'
+            id='userEmailSignUp'
+            placeholder='Email'
+          />
+          <label for='floatingInput'>Email address</label>
         </div>
-        <div class="form-floating">
-          <input type="password" class="form-control signUp" id="userPasswordSignUp" placeholder="Password">
-          <label for="floatingPasswordInput">Password</label>
+        <div class='form-floating'>
+          <input
+            type='password'
+            class='form-control signUp'
+            id='userPasswordSignUp'
+            placeholder='Password'
+          />
+          <label for='floatingPasswordInput'>Password</label>
         </div>
-        <div class="form-floating">
-          <input type="password" class="form-control signUp" id="confirmPassword" placeholder="Password again">
-          <label for="confirmFloatingPasswordInput">Confirm Password</label>
+        <div class='form-floating'>
+          <input
+            type='password'
+            class='form-control signUp'
+            id='confirmPassword'
+            placeholder='Password again'
+          />
+          <label for='confirmFloatingPasswordInput'>Confirm Password</label>
         </div>
-        <button type="button" id="sign-up" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button
+          type='button'
+          id='sign-up'
+          data-bs-toggle='modal'
+          data-bs-target='#exampleModal'
+        >
           Sign Up
         </button>
       </form>
     </div>
 
-    <div class="form-container sign-in-container">
-      <form action="#">
+    <div class='form-container sign-in-container'>
+      <form action='#'>
         <h1>Sign in</h1>
-        <div class="form-floating">
-          <input type="email" class="form-control" id="emalUser" placeholder="name@example.com">
-          <label for="floatingInput">Email address</label>
+        <div class='form-floating'>
+          <input
+            type='email'
+            class='form-control'
+            id='emalUser'
+            placeholder='name@example.com'
+          />
+          <label for='floatingInput'>Email address</label>
         </div>
-        <div class="form-floating">
-          <input type="password" class="form-control" id="passwordUser" placeholder="Password">
-          <label for="floatingPassword">Password</label>
+        <div class='form-floating'>
+          <input
+            type='password'
+            class='form-control'
+            id='passwordUser'
+            placeholder='Password'
+          />
+          <label for='floatingPassword'>Password</label>
         </div>
-        <button>Sign In</button>
+        <button id='sign-in'>Sign In</button>
       </form>
     </div>
 
-    <div class="overlay-container">
-      <div class="overlay">
-        <div class="overlay-panel overlay-left">
+    <div class='overlay-container'>
+      <div class='overlay'>
+        <div class='overlay-panel overlay-left'>
           <h1>Create an Account</h1>
           <p>To keep connected with us please add your personal info</p>
         </div>
 
-        <div class="overlay-panel overlay-right">
+        <div class='overlay-panel overlay-right'>
           <h1>You don't have a user?</h1>
           <p>
             Enter your personal details and start a journey with Life Multitask
             Makager
           </p>
-          <button class="ghost" id="signUp">Sign Up</button>
+          <button class='ghost' id='signUp'>Sign Up</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<script src="/js/login.js"></script>
-
+<script src='/js/login.js'></script>

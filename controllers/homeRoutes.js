@@ -1,10 +1,54 @@
 const router = require('express').Router();
 const { User } = require('../models');
+const Project = require('../models/Project');
+const Profile = require('../models/Profile');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
     res.render('login');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/projectRender', async (req, res) => {
+  try {
+    res.render('projectForm');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/activitiesRender', async (req, res) => {
+  try {
+    // Get all projects and JOIN with user data
+    const projectData = await Project.findAll();
+    res.json(projectData);
+    //console.log('projectData',projectData);
+
+    //res.render('activitiesForm');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/profileActivitiesRender/:profileId', async (req, res) => {
+  try {
+    // Get all projects and JOIN with profile data
+    const projectData = await Project.findAll({
+      where: {
+        userId: req.params.profileId,
+      },
+    });
+    //res.json(projectData);
+    //console.log('projectData',projectData);
+
+    const projects = projectData.map((project) => project.get({ plain: true }));
+
+    res.render('activitiesForm', {
+      projects,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -62,13 +106,16 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.get('/calendar', (req, res) => {
+router.get('/calendar', withAuth, (req, res) => {
   // // If the user is already logged in, redirect the request to another route
-  // if (req.session.logged_in) {
-  //   res.redirect("/profile");
-  //   return;
-  // }
-  console.log('calendar');
-  res.render('calendar');
+  if (req.session.logged_in) {
+    res.render('calendar', {
+      logged_in: req.session.logged_in,
+    });
+    return;
+  }
+
+  res.render('login');
 });
+
 module.exports = router;

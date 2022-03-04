@@ -1,8 +1,8 @@
-const router = require("express").Router();
-const { async } = require("jshint/src/prod-params");
-const User = require("../../models/User");
+const router = require('express').Router();
+// const { async } = require('jshint/src/prod-params');
+const User = require('../../models/User');
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
 
@@ -17,38 +17,45 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    const userData = await User.findOne({
+      where: { user_email: req.body.userEmail },
+    });
 
     if (!userData) {
       res
         .status(400)
-        .json({ message: "Incorrect email or password, please try again" });
+        .json({ message: 'Incorrect email or password, please try again' });
       return;
     }
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = await userData.checkPassword(req.body.userPassword);
 
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: "Incorrect email or password, please try again" });
+        .json({ message: 'Incorrect email or password, please try again' });
       return;
     }
 
     req.session.save(() => {
-      req.session.user_id = userData.id;
+      req.session.user_id = userData.dataValues.userId;
       req.session.logged_in = true;
 
-      res.json({ user: userData, message: "You are now logged in!" });
+      console.log('req: ', req.session);
+
+      res.json({
+        user: userData.dataValues,
+        message: 'You are now logged in!',
+      });
     });
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-router.post("/logout", (req, res) => {
+router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();
@@ -58,21 +65,23 @@ router.post("/logout", (req, res) => {
   }
 });
 
-router.post("/signup", async (req, res) => {
-  console.log(req.body);
-  // User.create({
-  //   userName: req.body.userName,
-  //   lastName: req.body.lastName,
-  //   email: req.body.email,
-  //   userPassword: req.body.userPassword,
-  // })
-  //   .then((newProfile) => {
-  //     // Send the newly created row as a JSON object
-  //     res.json(newProfile);
-  //   })
-  //   .catch((err) => {
-  //     res.json(err);
-  //   });
+router.post('/signup', async (req, res) => {
+  const { userName, userLastName, userEmailSignUp, userPasswordSignUp } =
+    req.body;
+
+  User.create({
+    userName,
+    userLastName,
+    userEmail: userEmailSignUp,
+    userPassword: userPasswordSignUp,
+  })
+    .then((newProfile) => {
+      // Send the newly created row as a JSON object
+      res.json(newProfile);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 });
 
 module.exports = router;

@@ -1,86 +1,126 @@
-<link rel="stylesheet" href="/css/calendar.css" />
-<div class="container-calendar">
-  <div class="todo-grid-parent">
+<link rel='stylesheet' href='/css/calendar.css' />
+<div class='flex-column justify-space-around'>
+  <header class='display-flex justify-space-between align-center p-2'>
+    <h1>
+      <a href='/'>Life Multitasking Manager!</a>
+    </h1>
+    <nav>
+      {{#if logged_in}}
+        <button class='no-button' id='logout'>logout</button>
+      {{/if}}
+    </nav>
+  </header>
+</div>
+<div class='container-calendar'>
+  <div class='todo-grid-parent'>
     <div>
-      {{!--       ADD NEW TASK     --}}
-      <div class="todo-input todo-block">
+      {{!       ADD NEW TASK     }}
+      <div class='todo-input todo-block'>
         <span>Task Title: </span>
-        <div class="form-floating signUp">
-          <input type="text" class="form-control" id="titleTask" placeholder="Enter new task">
-          <label for="floatingInput">Enter new task</label>
+        <div class='form-floating signUp'>
+          <input
+            type='text'
+            class='form-control'
+            id='titleTask'
+            placeholder='Enter new task'
+          />
+          <label for='floatingInput'>Enter new task</label>
         </div>
         <span>Category: </span>
-        <select class="form-select" id="categoryList" list="categoryList" aria-label="Select category">
+        <select
+          class='form-select'
+          id='categoryList'
+          list='categoryList'
+          aria-label='Select category'
+        >
           <option selected>Select category</option>
-          <option value="Personal">Personal</option>
-          <option value="Work">Work</option>
-          <option value="Doctor">Doctor</option>
+          <option value='Personal'>Personal</option>
+          <option value='Work'>Work</option>
+          <option value='Doctor'>Doctor</option>
         </select>
         <span>Start Date:</span>
-        <input type="date" id="startDate" onkeydown="return false" >
+        <input type='date' id='startDate' onkeydown='return false' />
         <span>Time:</span>
-        <input type="time" id="startTime">
+        <input type='time' id='startTime' />
         <span></span>
-        <button id="addTaskBtn">Add</button>
+        <button id='addTaskBtn'>Add</button>
       </div>
-      {{!-- TABLE WITH ALL TASK --}}
-      <div class="todo-block todoTable-block">
-        <div class="itemsPerPage">
+      {{! TABLE WITH ALL TASK }}
+      <div class='todo-block todoTable-block'>
+        <div class='itemsPerPage'>
           <span>Show Items</span>
-          <select id="itemsPerPageSelectElem">
+          <select id='itemsPerPageSelectElem'>
             <option>5</option>
             <option>10</option>
             <option>20</option>
           </select>
         </div>
-        <table id="todoTable">
+        <table id='todoTable'>
           <tr>
             <th>Date</th>
             <th>Time</th>
             <th>Task Title</th>
             <th>
-              <select class="form-select" id="categoryFilter" list="categoryFilter" aria-label="Select category">
+              <select
+                class='form-select'
+                id='categoryFilter'
+                list='categoryFilter'
+                aria-label='Select category'
+              >
               </select>
             </th>
           </tr>
         </table>
-        <div class="pagination-pages">
+        <div class='pagination-pages'>
         </div>
-        <button id="sortTaskBtn">Sort Task by Date</button>
+        <button id='sortTaskBtn'>Sort Task by Date</button>
       </div>
     </div>
-    {{!-- CALENDAR --}}
-    <div class="todo-calendar  todo-block">
+    {{! CALENDAR }}
+    <div class='todo-calendar todo-block'>
       <div id='calendar'></div>
     </div>
-    <br/>
+    <br />
   </div>
-  
-  {{!-- EDIT TASK MODAL --}}
-  <div class="todo-overlay" id="todo-overlay">
-    <div class="todo-modal" id="todo-modal">
-      <div class="todo-input todo-block">
+
+  {{! EDIT TASK MODAL }}
+  <div class='todo-overlay' id='todo-overlay'>
+    <div class='todo-modal' id='todo-modal'>
+      <div class='todo-input todo-block'>
         <span>Task Title: </span>
-        <div class="form-floating signUp">
-          <input type="text" class="form-control" id="todo-edit-todo" placeholder="Enter new task">
-          <label for="floatingInput">Enter new task</label>
+        <div class='form-floating signUp'>
+          <input
+            type='text'
+            class='form-control'
+            id='todo-edit-todo'
+            placeholder='Enter new task'
+          />
+          <label for='floatingInput'>Enter new task</label>
         </div>
         <span>Category: </span>
-        <select class="form-select" id="todo-edit-category" list="categoryList" aria-label="Select category">
+        <select
+          class='form-select'
+          id='todo-edit-category'
+          list='categoryList'
+          aria-label='Select category'
+        >
           <option selected>Select category</option>
-          <option value="Personal">Personal</option>
-          <option value="Work">Work</option>
-          <option value="Doctor">Doctor</option>
+          <option value='Personal'>Personal</option>
+          <option value='Work'>Work</option>
+          <option value='Doctor'>Doctor</option>
         </select>
         <span>Start Date:</span>
-        <input type="date" id="todo-edit-date" onkeydown="return false" >
+        <input type='date' id='todo-edit-date' onkeydown='return false' />
         <span>Time:</span>
-        <input type="time" id="todo-edit-time">
+        <input type='time' id='todo-edit-time' />
         <span></span>
-        <button id="saveChangesBtn">Save Changes</button>
+        <button id='saveChangesBtn'>Save Changes</button>
       </div>
     </div>
-    <div class="todo-modal-close-btn" id="todo-modal-close-btn">X</div>
+    <div class='todo-modal-close-btn' id='todo-modal-close-btn'>X</div>
   </div>
 </div>
-<script src="/js/calendar.js"></script>
+<script src='/js/calendar.js'></script>
+{{#if logged_in}}
+  <script src='/js/logout.js'></script>
+{{/if}}

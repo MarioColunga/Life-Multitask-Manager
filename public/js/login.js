@@ -9,32 +9,38 @@ signUpButton.addEventListener('click', () => {
   container.classList.add('right-panel-active');
 });
 
-function validRegex(input) {
+function validRegex(value, input) {
   if ((input.type = 'text')) {
     const validNames =
       /^[a-z\u00C0-\u02AB'´`]+\.?\s([a-z\u00C0-\u02AB'´`]+\.?\s?)+$/;
-    if (!validNames.test(input.value.trim())) {
-      return alert(`Error please add a valid ${input.placeholder}`);
-    }
+    return {
+      error: validNames.test(value.trim()),
+      message: `Error please add a valid ${input.placeholder}`,
+    };
   } else {
     const validEmail =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if (!validEmail.test(input.value.trim())) {
-      return alert(`Error please add a valid ${input.placeholder}`);
-    }
+    return {
+      error: validEmail.test(value.trim()),
+      message: `Error please add a valid ${input.placeholder}`,
+    };
   }
 }
 
 async function signUpHandler(event) {
   event.preventDefault();
   const signUpFields = document.getElementsByClassName('signUp');
-  const confirmPassword = document.getElementById('confirmPassword');
-  const userPasswordSignUp = document.getElementById('userPasswordSignUp');
-  const userName = document.getElementById('userName');
-  const userLastName = document.getElementById('userLastName');
-  const userEmailSignUp = document.getElementById('userEmailSignUp');
+
+  const userName = document.getElementById('userName').value;
+  const userLastName = document.getElementById('userLastName').value;
+  const userEmailSignUp = document.getElementById('userEmailSignUp').value;
+  const userPasswordSignUp =
+    document.getElementById('userPasswordSignUp').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
+
   let error = false;
   let message = '';
+
   for (let i = 0; i < signUpFields.length; i++) {
     if (!signUpFields[i].value) {
       error = true;
@@ -42,20 +48,50 @@ async function signUpHandler(event) {
       break;
     }
   }
+
   if (userPasswordSignUp.value !== confirmPassword.value) {
     message = `Password doesn't match`;
     error = true;
   }
+
   if (error) {
     alert(message);
   }
 
-  // if (name && email && password) {
-  // const response = await fetch('/api/users/signup', {
-  //   method: 'POST',
-  //   body: JSON.stringify({ userName, userLastName, userEmail, userPassword }),
-  //   headers: { 'Content-Type': 'application/json' },
-  // });
+  if (!error) {
+    const response = await fetch('/api/users/signup', {
+      method: 'POST',
+      body: JSON.stringify({
+        userName,
+        userLastName,
+        userEmailSignUp,
+        userPasswordSignUp,
+      }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    console.log('r: ', response);
+  }
+}
+
+async function signInHandler(event) {
+  event.preventDefault();
+
+  const userEmail = document.getElementById('emalUser').value;
+  const userPassword = document.getElementById('passwordUser').value;
+
+  const response = await fetch('/api/users/login', {
+    method: 'POST',
+    body: JSON.stringify({
+      userEmail,
+      userPassword,
+    }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (response.ok) {
+    document.location.replace('/calendar');
+  }
 }
 
 document.getElementById('sign-up').addEventListener('click', signUpHandler);
+document.getElementById('sign-in').addEventListener('click', signInHandler);
