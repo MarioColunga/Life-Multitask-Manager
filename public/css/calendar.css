@@ -2,8 +2,12 @@
 
 .container-calendar {
   padding: 40px;
-  background-color: #0093e9;
-  background-image: linear-gradient(160deg, #0093e9 0%, #80aed0 100%);
+  background-color: var(--main-site-color);
+  background-image: linear-gradient(
+    160deg,
+    var(--main-site-color) 0%,
+    var(--secondary-site-color) 100%
+  );
 }
 
 td {
@@ -12,13 +16,13 @@ td {
 }
 
 th {
-  color: #0093e9;
+  color: var(--main-site-color);
   border: 1px solid black;
   padding: 5px;
 }
 
 .todo-input {
-  background-color: #80aed0;
+  background-color: var(--secondary-site-color);
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 1rem;
@@ -45,7 +49,7 @@ th {
 
 .todo-block {
   background-color: white;
-  border: 1px solid #80aed0;
+  border: 1px solid var(--secondary-site-color);
   padding: 1rem;
   border-radius: 20px;
   color: #0a0b0bb3;
@@ -92,7 +96,7 @@ th {
 .todo-modal {
   min-width: 50vw;
   height: 50vh;
-  background-color: #80aed0;
+  background-color: var(--secondary-site-color);
 }
 
 .todo-modal-close-btn {
@@ -121,8 +125,8 @@ th {
 
 button {
   border-radius: 20px;
-  border: 1px solid #0093e9;
-  background-color: #0093e9;
+  border: 1px solid var(--main-site-color);
+  background-color: var(--main-site-color);
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;

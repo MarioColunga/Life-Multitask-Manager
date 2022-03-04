@@ -59,10 +59,10 @@ router.post('/', (req, res) => {
   console.log(req.body)
   
   Project.create({
-    projectId: req.body.projectId,
     projectName: req.body.projectName,
     projectDescription: req.body.projectDescription,
-    deadLine: req.body.deadLine
+    userId: req.body.userId,
+    deadLine: req.body.deadLine,
 
   })
     .then((newProject) => {

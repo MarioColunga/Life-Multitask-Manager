@@ -80,6 +80,7 @@ router.post('/signup', async (req, res) => {
       res.json(newProfile);
     })
     .catch((err) => {
+      console.log(err);
       res.json(err);
     });
 });
