@@ -9,21 +9,19 @@ signUpButton.addEventListener('click', () => {
   container.classList.add('right-panel-active');
 });
 
-function validRegex(value, input) {
+function validRegex(input) {
   if ((input.type = 'text')) {
     const validNames =
       /^[a-z\u00C0-\u02AB'´`]+\.?\s([a-z\u00C0-\u02AB'´`]+\.?\s?)+$/;
-    return {
-      error: validNames.test(value.trim()),
-      message: `Error please add a valid ${input.placeholder}`,
-    };
+    if (!validNames.test(input.value.trim())) {
+      return alert(`Error please add a valid ${input.placeholder}`);
+    }
   } else {
     const validEmail =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    return {
-      error: validEmail.test(value.trim()),
-      message: `Error please add a valid ${input.placeholder}`,
-    };
+    if (!validEmail.test(input.value.trim())) {
+      return alert(`Error please add a valid ${input.placeholder}`);
+    }
   }
 }
 
@@ -48,7 +46,6 @@ async function signUpHandler(event) {
     message = `Password doesn't match`;
     error = true;
   }
-
   if (error) {
     alert(message);
   }
