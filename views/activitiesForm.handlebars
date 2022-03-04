@@ -1,21 +1,44 @@
-<!-- Loop over each object in the projects array -->
-<table class="table" style="margin:15px;">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Project Id</th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Options</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each projects as |project| }}
-    <tr>
-      <th scope="row">{{project.projectId}}</th>
-      <td>{{project.projectName}}</td>
-      <td>{{project.projectDescription}}</td>
-      <td>Add Delete</td>
-    </tr>
+   {{#each projects as |project| }}
+   <p>Project Id: <span id="projectId">{{project.projectId}}</span></p>
+   <p>Project Name: <span>{{project.projectName}}</span></p>       
    {{/each}} 
-  </tbody>
-</table>
+
+<form>
+  <div class="form-group row">
+    <label for="inputActivityName" class="col-sm-10 col-form-label">Activity Name:</label>
+    <div class="col-10 col-sm-12">
+      <input type="text" class="form-control" id="inputActivityName" placeholder="Activity Name">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputActivityDescription" class="col-sm-10 col-form-label">Activity Description:</label>
+    <div class="col-10 col-sm-12">
+      <input type="text" class="form-control" id="inputActivityDescription" placeholder="Activity Description">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputActivityDeadLine" class="col-sm-10 col-form-label">Dead Line:</label>
+    <div class="col-10 col-sm-12">
+      <input type="date" class="form-control" id="inputActivityDeadLine" placeholder="Dead line">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputStartHour" class="col-sm-10 col-form-label">Start Hour:</label>
+    <div class="col-10 col-sm-12">
+      <input type="time" class="form-control" id="inputStartHour" placeholder="Start Hour">
+    </div>
+  </div>   
+  <div class="form-group row">
+    <label for="inputEndHour" class="col-sm-10 col-form-label">End Hour:</label>
+    <div class="col-10 col-sm-12">
+      <input type="time" class="form-control" id="inputEndHour" placeholder="End Hour">
+    </div>
+  </div>      
+  <div class="form-group row">
+    <div class="col-10 col-sm-12">
+      <button type="submit" id="saveActivity" class="btn btn-primary" style="margin-top:15px;">Save Activity</button>
+    </div>
+  </div>
+</form>
+
+<script src="/js/activities.js"></script>
