@@ -1,25 +1,19 @@
-const saveProjectButton = document.getElementById('signUp');
-const container = document.getElementById('container');
+document.getElementById('saveProject').addEventListener('click', saveProject);
 
-saveProjectButton.addEventListener('click', () => {
-  container.classList.add('right-panel-active');
-});
-
-function handleError() {}
-
-async function signUpHandler(event) {
+async function saveProject(){
   event.preventDefault();
-  const userName = document.getElementById('userName').value.trim();
-  const userLastName = document.getElementById('userLastName').value.trim();
-  const userEmail = document.getElementById('userEmail').value.trim();
-  const userPassword = document.getElementById('userPassword').value.trim();
+  console.log('Into saveProject');
+  const projectName = document.getElementById('inputProjectName').value.trim();
+  const projectDescription = document.getElementById('inputProjectDescription').value.trim();
+  const userId = 1;
+  const deadLine = document.getElementById('inputProjectDeadLine').value.trim();
 
-  // if (name && email && password) {
-  const response = await fetch('/api/users/signup', {
-    method: 'POST',
-    body: JSON.stringify({ userName, userLastName, userEmail, userPassword }),
-    headers: { 'Content-Type': 'application/json' },
-  });
+  if (projectName && projectDescription && userId && deadLine) {
+    //const response = await fetch('/api/users/saveProject', {
+    const response = await fetch('/api/projects/', {
+      method: 'POST',
+      body: JSON.stringify({ projectName, projectDescription, userId, deadLine }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 }
-
-document.getElementById('sign-up').addEventListener('click', signUpHandler);
