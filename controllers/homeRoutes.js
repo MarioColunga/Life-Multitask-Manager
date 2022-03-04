@@ -23,13 +23,9 @@ router.get('/projectFormRender', async (req, res) => {
 
 router.get('/activitieFormRender/:projectId', async (req, res) => {
   try {
-<<<<<<< HEAD
     //Get project with the projectId
     const projectData = await Project.findAll({      
-=======
-    //Get project with projectId
-    const projectData = await Project.findAll({
->>>>>>> main
+
       where: {
         projectId: req.params.projectId,
       },
@@ -68,18 +64,12 @@ router.get('/projectTableRender', async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
 //search projects from a specific profile (user)
 router.get('/profileProjectTableRender/:profileId', async (req, res) => { 
   try {
     // Get all projects from a profile (user)
     const projectData = await Project.findAll({      
-=======
-router.get('/profileProjectTableRender/:profileId', async (req, res) => {
-  try {
-    // Get all projects and JOIN with profile data
-    const projectData = await Project.findAll({
->>>>>>> main
+
       where: {
         userId: req.params.profileId,
       },
@@ -97,9 +87,6 @@ router.get('/profileProjectTableRender/:profileId', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-<<<<<<< HEAD
-
 
 //search activities from a specific project (user)
 router.get('/projectActivitiesTableRender/:projectId', async (req, res) => { 
@@ -139,12 +126,6 @@ router.get('/projectActivitiesTableRender/:projectId', async (req, res) => {
   
 });
 
-
-
-
-
-=======
->>>>>>> main
 router.get('/project/:id', async (req, res) => {
   try {
     const projectData = await Project.findByPk(req.params.id, {
