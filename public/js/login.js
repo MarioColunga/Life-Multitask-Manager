@@ -48,7 +48,6 @@ async function signUpHandler(event) {
       break;
     }
   }
-
   if (userPasswordSignUp.value !== confirmPassword.value) {
     message = `Password doesn't match`;
     error = true;
