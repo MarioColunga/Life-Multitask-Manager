@@ -15,5 +15,7 @@ async function saveProject(){
       body: JSON.stringify({ projectName, projectDescription, userId, deadLine }),
       headers: { 'Content-Type': 'application/json' },
     });
+    console.log('project Saved!!');
+    document.location = '/profileProjectTableRender/'+userId;
   }
 }

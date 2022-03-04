@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { User } = require('../models');
 const Project = require('../models/Project');
 const Profile = require('../models/Profile');
+const Activity = require('../models/Activity');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -22,8 +23,9 @@ router.get('/projectFormRender', async (req, res) => {
 
 router.get('/activitieFormRender/:projectId', async (req, res) => {
   try {
-    //Get project with projectId
-    const projectData = await Project.findAll({
+    //Get project with the projectId
+    const projectData = await Project.findAll({      
+
       where: {
         projectId: req.params.projectId,
       },
@@ -62,10 +64,12 @@ router.get('/projectTableRender', async (req, res) => {
   }
 });
 
-router.get('/profileProjectTableRender/:profileId', async (req, res) => {
+//search projects from a specific profile (user)
+router.get('/profileProjectTableRender/:profileId', async (req, res) => { 
   try {
-    // Get all projects and JOIN with profile data
-    const projectData = await Project.findAll({
+    // Get all projects from a profile (user)
+    const projectData = await Project.findAll({      
+
       where: {
         userId: req.params.profileId,
       },
@@ -82,6 +86,44 @@ router.get('/profileProjectTableRender/:profileId', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
+});
+
+//search activities from a specific project (user)
+router.get('/projectActivitiesTableRender/:projectId', async (req, res) => { 
+  try {
+     //Get project with the projectId
+     const projectData = await Project.findAll({      
+      where: {
+        projectId: req.params.projectId,
+      }    
+    });
+    const projectDataPlain = projectData.map((project) => project.get({ plain: true }));   
+    //console.log('projectDataPlain',projectDataPlain);
+    //console.log('projectData',projectData);
+    
+    const projects= [{projectId: req.params.projectId, projectName: `${projectDataPlain[0].projectName}`},];
+    //console.log('projects plain',projects)
+
+
+    // Get all activites from a project
+    const activityData = await Activity.findAll({      
+      where: {
+        projectId: req.params.projectId,
+      }    
+    });
+    //res.json(projectData);
+    //console.log('projectData',projectData);
+
+    const activities = activityData.map((project) => project.get({ plain: true }));   
+    console.log('activities',activities);
+
+    res.render('projectActivitiesTable',{
+      activities, projects
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+  
 });
 
 router.get('/project/:id', async (req, res) => {
