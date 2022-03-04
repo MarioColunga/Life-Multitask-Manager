@@ -1,0 +1,29 @@
+<!-- Loop over each object in the projects array -->
+   {{#each projects as |project| }}
+   <p>Project Id: <span id="projectId">{{project.projectId}}</span></p>
+   <p>Project Name: <span>{{project.projectName}}</span></p>       
+   {{/each}}
+
+
+<table class="table" style="margin:15px;">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Activity Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each activities as |activity| }}
+    <tr>
+      <th scope="row">{{activity.activityId}}</th>
+      <td>{{activity.activityName}}</td>
+      <td>{{activity.activityDescription}}</td>
+      <td>{{activity.activitydeadLine}}</td>
+      <td> Update Delete</td>
+    </tr>
+   {{/each}} 
+  </tbody>
+</table>

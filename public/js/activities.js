@@ -18,6 +18,8 @@ async function saveActivity(){
       body: JSON.stringify({ projectId,activityName,activityDescription,activityDeadLine,startHour,endHour }),
       headers: { 'Content-Type': 'application/json' },
     });
+    console.log('activitie Saved!!');
+    document.location = '/projectActivitiesTableRender/'+projectId;
   }
   
 }
