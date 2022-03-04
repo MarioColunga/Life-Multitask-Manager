@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Rowdies&family=Titillium+Web&display=swap');
 
-.strike {
-  text-decoration: line-through;
+.container-calendar {
+  padding: 40px;
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 0%, #80aed0 100%);
 }
 
 td {
@@ -9,7 +11,14 @@ td {
   padding: 5px;
 }
 
+th {
+  color: #0093e9;
+  border: 1px solid black;
+  padding: 5px;
+}
+
 .todo-input {
+  background-color: #80aed0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 1rem;
@@ -20,6 +29,7 @@ td {
 }
 
 .pagination-pages {
+  color: #0094e9b3;
   text-align: right;
 }
 
@@ -28,40 +38,17 @@ td {
   cursor: pointer;
 }
 
-.material-icons {
+.modifyTask {
+  margin-right: 0.5rem;
   cursor: pointer;
 }
 
-::-ms-input-placeholder {
-  color: #ed6a5e;
-}
-
-::-webkit-input-placeholder {
-  color: #ed6a5e;
-}
-
-::placeholder {
-  color: #ed6a5e;
-}
-
-input {
-  color: #a11e12;
-}
-
-h3 {
-  color: #a11e12;
-  font-family: 'Rowdies', cursive;
-}
-
-body {
-  font-family: 'Titillium Web', sans-serif;
-}
-
 .todo-block {
-  border: 1px solid #ff8e72;
+  background-color: white;
+  border: 1px solid #80aed0;
   padding: 1rem;
   border-radius: 20px;
-  color: #a11e12;
+  color: #0a0b0bb3;
 }
 
 @media screen and (max-width: 767px) {
@@ -105,12 +92,11 @@ body {
 .todo-modal {
   min-width: 50vw;
   height: 50vh;
-  /*border: 1px solid green;*/
-  background-color: #ffd6cc;
+  background-color: #80aed0;
 }
 
 .todo-modal-close-btn {
-  background-color: red;
+  background-color: #0094e9b3;
   position: absolute;
   top: 2rem;
   right: 2rem;
@@ -130,21 +116,33 @@ body {
 }
 
 #todoTable tr:nth-child(even) {
-  background-color: #ffd6cc;
+  background-color: #b6cee1;
 }
 
 button {
-  background-color: #ffd6cc;
-  color: #a11e12;
-  border: 1px outset #ed6a5e;
+  border-radius: 20px;
+  border: 1px solid #0093e9;
+  background-color: #0093e9;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
 }
 
 button:active {
-  border: 1px inset #ed6a5e;
+  transform: scale(0.95);
 }
 
-button:hover {
-  background-color: #ffad99;
+button:focus {
+  outline: none;
+}
+
+button.ghost {
+  background-color: transparent;
+  border-color: #ffffff;
 }
 
 .chevron {
@@ -154,4 +152,21 @@ button:hover {
 .itemsPerPage {
   text-align: right;
   margin-bottom: 0.5rem;
+  color: #0094e9b3;
+}
+
+footer {
+  background-color: #222;
+  color: #fff;
+  font-size: 14px;
+  bottom: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 1;
+}
+
+footer p {
+  margin: 10px;
 }
