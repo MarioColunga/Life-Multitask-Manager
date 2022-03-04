@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../models');
+const Project = require('../models/Project');
+const Profile = require('../models/Profile');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -18,12 +20,40 @@ router.get('/projectRender', async (req, res) => {
   }
 });
 
-router.get('/activitiesRender', async (req, res) => {
+router.get('/activitiesRender', async (req, res) => { 
   try {
-    res.render('activitiesForm');
+    // Get all projects and JOIN with user data
+    const projectData = await Project.findAll();
+    res.json(projectData);
+    //console.log('projectData',projectData);
+
+    //res.render('activitiesForm');
   } catch (err) {
     res.status(500).json(err);
   }
+  
+});
+
+router.get('/profileActivitiesRender/:profileId', async (req, res) => { 
+  try {
+    // Get all projects and JOIN with profile data
+    const projectData = await Project.findAll({      
+      where: {
+        userId: req.params.profileId,
+      }    
+    });
+    //res.json(projectData);
+    //console.log('projectData',projectData);
+
+    const projects = projectData.map((project) => project.get({ plain: true }));   
+
+    res.render('activitiesForm',{
+      projects
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+  
 });
 
 
