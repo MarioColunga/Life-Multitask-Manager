@@ -79,6 +79,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+<<<<<<< HEAD
 router.get('/calendar', (req, res) => {
   // // If the user is already logged in, redirect the request to another route
   // if (req.session.logged_in) {
@@ -89,4 +90,6 @@ router.get('/calendar', (req, res) => {
   res.render('calendar');
 });
 
+=======
+>>>>>>> origin
 module.exports = router;

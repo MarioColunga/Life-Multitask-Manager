@@ -48,21 +48,6 @@ p.notice {
     color: #ffffff;
     font-weight: bold;
 }
-
-button {
-    border-radius: 20px;
-    border: 1px solid #0093e9;
-    background-color: #0093e9;
-    color: #ffffff;
-    margin-top:50px;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-    cursor: pointer;
-  }
   
   button:active {
     transform: scale(0.95);
@@ -75,20 +60,4 @@ button {
   button.ghost {
     background-color: transparent;
     border-color: #ffffff;
-  }
-
-  footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 1;
-  }
-  
-  footer p {
-    margin: 10px 0;
   }
