@@ -4,6 +4,7 @@ dist
 # local env files
 .env.local
 .env.*.local
+.env
 env
 
 # Log files
@@ -14,4 +15,5 @@ yarn-error.log*
 # Editor directories and files
 .vscode
 .DS_Store
+.package-lock.json
 package-lock.json
