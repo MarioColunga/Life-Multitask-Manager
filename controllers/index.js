@@ -1,13 +1,13 @@
-const router = require('express').Router();
-const apiRoutes = require('./api');
-const homeRoutes = require('./homeRoutes');
+const router = require("express").Router();
+const apiRoutes = require("./api");
+const homeRoute = require("./home");
 
-router.use('/', homeRoutes);
-router.use('/api', apiRoutes);
+router.use("/", homeRoute);
+router.use("/api", apiRoutes);
 
-router.get('*', (req, res) => {
-    res.render("404");
-    res.status(404);
-  });
+router.get("*", (_, res) => {
+  res.render("404");
+  res.status(404);
+});
 
 module.exports = router;

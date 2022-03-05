@@ -1,49 +1,34 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/calendar">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/projectFormRender/{{user_logged}}">Add Projects</a>
-      <a class="nav-item nav-link" href="/profileProjectTableRender/{{user_logged}}">Read Projects</a>
-      <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
-    </div>
-  </div>
-</nav>
 
 <link rel='stylesheet' href='/css/calendar.css' />
-<div class='flex-column justify-space-around'>
-  <header class='display-flex justify-space-between align-center p-2'>
-   <!-- <h1>
-      <a href='/'>Life Multitasking Manager!</a>
-    </h1> -->
-    <nav>
-      {{#if logged_in}}
-        <button class='no-button' id='logout'>logout</button>
-      {{/if}}
-    </nav>
-    <div style="display:none;">
-      <p>User estatus: {{logged_in}}</p>
-      <p>User Logged: <span id="user_logged">{{user_logged}}</span></p>
-    </div>
-  </header>
-</div>
-<div class='container-calendar'>
+<div class='container-calendar'>  
+  {{#if logged_in}}
+    <button  id='logout'>logout</button>
+  {{/if}}
+  
   <div class='todo-grid-parent'>
     <div>
+
       {{!       ADD NEW TASK     }}
       <div class='todo-input todo-block'>
-        <span>Task Title: </span>
-        <div class='form-floating signUp'>
+        <span>Project Title: </span>
+        <div class='form-floating'>
           <input
             type='text'
             class='form-control'
             id='titleTask'
             placeholder='Enter new task'
           />
-          <label for='floatingInput'>Enter new task</label>
+          <label for='floatingInput'>Enter new project</label>
+        </div>
+        <span>Description: </span>
+        <div class='form-floating'>
+          <input
+            type='text'
+            class='form-control'
+            id='description'
+            placeholder='Enter new task'
+          />
+          <label for='floatingInput'>Description</label>
         </div>
         <span>Category: </span>
         <select
@@ -57,7 +42,7 @@
           <option value='Work'>Work</option>
           <option value='Doctor'>Doctor</option>
         </select>
-        <span>Start Date:</span>
+        <span>Dead Line:</span>
         <input type='date' id='startDate' onkeydown='return false' />
         <span>Time:</span>
         <input type='time' id='startTime' />
@@ -92,7 +77,7 @@
         </table>
         <div class='pagination-pages'>
         </div>
-        <button id='sortTaskBtn'>Sort Task by Date</button>
+        <button id='sortTaskBtn'>Sort project by deadline</button>
       </div>
     </div>
     {{! CALENDAR }}
@@ -106,7 +91,7 @@
   <div class='todo-overlay' id='todo-overlay'>
     <div class='todo-modal' id='todo-modal'>
       <div class='todo-input todo-block'>
-        <span>Task Title: </span>
+        <span>Project Title: </span>
         <div class='form-floating signUp'>
           <input
             type='text'
@@ -114,7 +99,17 @@
             id='todo-edit-todo'
             placeholder='Enter new task'
           />
-          <label for='floatingInput'>Enter new task</label>
+          <label for='floatingInput'>Enter new project</label>
+        </div>
+        <span>Description: </span>
+        <div class='form-floating'>
+          <input
+            type='text'
+            class='form-control'
+            id='edit-description'
+            placeholder='Enter new task'
+          />
+          <label for='floatingInput'>Description</label>
         </div>
         <span>Category: </span>
         <select
@@ -128,11 +123,13 @@
           <option value='Work'>Work</option>
           <option value='Doctor'>Doctor</option>
         </select>
-        <span>Start Date:</span>
+        <span>Deadline:</span>
         <input type='date' id='todo-edit-date' onkeydown='return false' />
         <span>Time:</span>
         <input type='time' id='todo-edit-time' />
-        <span></span>
+        <span>Activities</span>
+        <span><a id="readActivities">Read</a> <a id="addActivities">Add</a></span>
+
         <button id='saveChangesBtn'>Save Changes</button>
       </div>
     </div>

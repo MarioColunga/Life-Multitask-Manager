@@ -1,44 +1,50 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
-// Create a new Sequelize model for books
 class Project extends Model {}
 
 Project.init(
-  // Define fields/columns on model
-  // An `id` is automatically created by Sequelize, though best practice would be to define the primary key ourselves
   {
-    projectId: {
+    id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
-    
-    projectName: {
-      type: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    projectDescription: {
-      type: DataTypes.STRING
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    userId: { 
-      type: DataTypes.INTEGER,
-      references: {
-          model:"Profile",
-          key: "userId"
-      }
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     deadLine: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    time: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "Users",
+        key: "id",
+      },
     },
   },
   {
-    // Link to database connection
     sequelize,
-    // Set to false to remove `created_at` and `updated_at` fields
     timestamps: false,
     freezeTableName: true,
-    underscored: false,
-    modelName: 'project'
+    underscored: true,
+    modelName: "projects",
   }
 );
 
