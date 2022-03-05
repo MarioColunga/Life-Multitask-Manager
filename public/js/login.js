@@ -126,6 +126,7 @@ async function signInHandler(event) {
     })
   ).json();
 
+  console.log(response);
   sessionStorage.setItem("user_id", response.user.id);
 
   if (response.success) {

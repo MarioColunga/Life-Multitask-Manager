@@ -26,7 +26,7 @@ router.get("/activitieFormRender/:projectId/:userId", async (req, res) => {
       const projects = [
         {
           projectId: req.params.projectId,
-          projectName: `${projectDataPlain[0].name}`,
+          name: `${projectDataPlain[0].name}`,
         },
       ];
       res.render("activitiesForm", {

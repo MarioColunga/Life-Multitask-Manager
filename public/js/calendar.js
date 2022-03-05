@@ -12,7 +12,6 @@ async function todoMain() {
   const saveChangesBtn = document.getElementById("saveChangesBtn");
 
   let selectElem,
-    todoList = [],
     calendar,
     todoTable,
     draggingElement,
@@ -26,9 +25,7 @@ async function todoMain() {
   getElements();
   addListeners();
   initCalendar();
-  await load();
-  renderRows(todoList);
-  updateSelectOptions();
+  await sortEntry();
 
   function getElements() {
     selectElem = document.getElementById("categoryFilter");
@@ -88,51 +85,6 @@ async function todoMain() {
     ).json();
 
     addEvent(dataValues);
-  }
-
-  function updateSelectOptions() {
-    let options = [];
-
-    todoList.forEach((obj) => {
-      options.push(obj.category);
-    });
-
-    let optionsSet = new Set(options);
-
-    // empty the select options
-    selectElem.innerHTML = "";
-
-    let newOptionElem = document.createElement("option");
-    newOptionElem.value = DEFAULT_OPTION;
-    newOptionElem.innerText = DEFAULT_OPTION;
-    selectElem.appendChild(newOptionElem);
-
-    for (let option of optionsSet) {
-      let newOptionElem = document.createElement("option");
-      newOptionElem.value = option;
-      newOptionElem.innerText = option;
-      selectElem.appendChild(newOptionElem);
-    }
-  }
-
-  function save() {
-    let stringified = JSON.stringify(todoList);
-    localStorage.setItem("todoList", stringified);
-  }
-
-  async function load() {
-    const projects = await (
-      await fetch("/api/projects", {
-        method: "GET",
-      })
-    ).json();
-
-    todoList = projects;
-    // let retrieved = localStorage.getItem("todoList");
-    // todoList = JSON.parse(retrieved);
-    // if (todoList == null) todoList = [];
-
-    itemsPerPageSelectElem.value = itemsPerPage;
   }
 
   function renderRows(arr) {
@@ -224,18 +176,43 @@ async function todoMain() {
     }
   }
 
-  function sortEntry() {
-    todoList.sort((a, b) => {
-      let aDate = Date.parse(a.date);
-      let bDate = Date.parse(b.date);
+  async function sortEntry() {
+    const userId = sessionStorage.getItem("user_id");
+    const options = [];
+    const projects = await (
+      await fetch(`/api/projects/user/${userId}`, {
+        method: "GET",
+      })
+    ).json();
+    projects.sort((a, b) => {
+      let aDate = Date.parse(a.deadLine);
+      let bDate = Date.parse(b.deadLine);
       return aDate - bDate;
     });
 
-    save();
+    projects.forEach((obj) => {
+      options.push(obj.category);
+    });
 
+    const optionsSet = new Set(options);
+
+    // empty the select options
+    selectElem.innerHTML = "";
+
+    const newOptionElem = document.createElement("option");
+    newOptionElem.value = DEFAULT_OPTION;
+    newOptionElem.innerText = DEFAULT_OPTION;
+    selectElem.appendChild(newOptionElem);
+
+    for (let option of optionsSet) {
+      let newOptionElem = document.createElement("option");
+      newOptionElem.value = option;
+      newOptionElem.innerText = option;
+      selectElem.appendChild(newOptionElem);
+    }
     clearTable();
 
-    renderRows(todoList);
+    renderRows(projects);
   }
 
   function initCalendar() {
@@ -292,30 +269,26 @@ async function todoMain() {
     calendar.getEvents().forEach((event) => event.remove());
   }
 
-  function multipleFilter() {
+  async function multipleFilter() {
     clearTable();
+    const userId = sessionStorage.getItem("user_id");
+    const projects = await (
+      await fetch(`/api/projects/user/${userId}`, {
+        method: "GET",
+      })
+    ).json();
 
     let selection = selectElem.value;
 
     if (selection == DEFAULT_OPTION) {
-      renderRows(todoList);
+      renderRows(projects);
     } else {
-      let filteredCategoryArray = todoList.filter(
+      let filteredCategoryArray = projects.filter(
         (obj) => obj.category == selection
       );
+      console.log("here", filteredCategoryArray);
       renderRows(filteredCategoryArray);
     }
-  }
-
-  function formatDate(date) {
-    let dateObj = new Date(date);
-    console.log(dateObj);
-    let formattedDate = dateObj.toLocaleString("en-GB", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    });
-    return formattedDate;
   }
 
   function showEditModalBox() {
@@ -345,12 +318,7 @@ async function todoMain() {
     // remove from calendar
     calendar.getEventById(id).remove();
 
-    const projects = await (
-      await fetch("/api/projects", {
-        method: "GET",
-      })
-    ).json();
-    renderRows(projects);
+    await sortEntry();
   }
 
   function toEditItem(event) {
@@ -368,9 +336,6 @@ async function todoMain() {
   }
 
   async function preFillEditForm(id) {
-    // let result = todoList.find((todoObj) => todoObj.id == id);
-    // let { todo, category, date, time } = result;
-
     const { name, time, deadLine, category, description } = await (
       await fetch(`/api/projects/${id}`, {
         method: "GET",
@@ -399,8 +364,14 @@ async function todoMain() {
     draggingElement = event.target; //trElem
   }
 
-  function onDrop(event) {
+  async function onDrop(event) {
     /* Handling visual drag and drop of the rows */
+    const userId = sessionStorage.getItem("user_id");
+    const projects = await (
+      await fetch(`/api/projects/user/${userId}`, {
+        method: "GET",
+      })
+    ).json();
 
     if (event.target.matches("table")) return;
 
@@ -418,24 +389,21 @@ async function todoMain() {
     let tempIndex;
 
     // find the index of one to be taken out
-    todoList.forEach((todoObj, index) => {
+    projects.forEach((todoObj, index) => {
       if (todoObj.id == draggingElement.dataset.id) tempIndex = index;
     });
 
     // pop the element
-    let [toInsertObj] = todoList.splice(tempIndex, 1);
+    let [toInsertObj] = projects.splice(tempIndex, 1);
 
     // find the index of one to be inserted before
 
-    todoList.forEach((todoObj, index) => {
+    projects.forEach((todoObj, index) => {
       if (todoObj.id == beforeTarget.dataset.id) tempIndex = index;
     });
 
     // insert the temp
-    todoList.splice(tempIndex, 0, toInsertObj);
-
-    // update storage
-    save();
+    projects.splice(tempIndex, 0, toInsertObj);
   }
 
   function onDragover(event) {
@@ -445,43 +413,9 @@ async function todoMain() {
   function calendarEventDragged(event) {
     console.log("e: ", event);
     console.log("even: ", event.id);
-    // let id = event.id;
-    // let dateObj = new Date(event.start);
-    // let year = dateObj.getFullYear();
-    // let month = dateObj.getMonth() + 1;
-    // let date = dateObj.getDate();
-    // let hour = dateObj.getHours();
-    // let minute = dateObj.getMinutes();
-
-    // let paddedMonth = month.toString();
-    // if (paddedMonth.length < 2) {
-    //   paddedMonth = "0" + paddedMonth;
-    // }
-
-    // let paddedDate = date.toString();
-    // if (paddedDate.length < 2) {
-    //   paddedDate = "0" + paddedDate;
-    // }
-
-    // let toStoreDate = `${year}-${paddedMonth}-${paddedDate}`;
-    // console.log(toStoreDate);
-
-    // todoList.forEach((todoObj) => {
-    //   if (todoObj.id == id) {
-    //     todoObj.date = toStoreDate;
-    //     if (hour !== 0)
-    //       todoObj.time = `${hour.toString().padStart(2, "0")}:${minute
-    //         .toString()
-    //         .padStart(2, "0")}`;
-    //   }
-    // });
-
-    // save();
-
-    // multipleFilter();
   }
 
-  function onPaginationBtnsClick(event) {
+  async function onPaginationBtnsClick(event) {
     switch (event.target.dataset.pagination) {
       case "pageNumber":
         currentPage = Number(event.target.innerText);
@@ -500,7 +434,7 @@ async function todoMain() {
         break;
       default:
     }
-    multipleFilter();
+    await multipleFilter();
   }
 
   function renderPageNumbers(arr) {
@@ -531,9 +465,9 @@ async function todoMain() {
       <span class="chevron" data-pagination="lastPage">Last</span>`;
   }
 
-  function selectItemsPerPage(event) {
+  async function selectItemsPerPage(event) {
     itemsPerPage = Number(event.target.value);
     localStorage.setItem("todo-itemsPerPage", itemsPerPage);
-    multipleFilter();
+    await multipleFilter();
   }
 }

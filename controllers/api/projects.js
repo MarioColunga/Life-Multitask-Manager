@@ -14,9 +14,14 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (_, res) => {
+router.get("/user/:userId", async (req, res) => {
+  console.log("holi");
   try {
-    const projects = await Project.findAll();
+    const projects = await Project.findAll({
+      where: {
+        userId: req.params.userId,
+      },
+    });
 
     res.status(200).send(projects);
   } catch (error) {
