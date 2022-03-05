@@ -13,16 +13,19 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/projectFormRender', async (req, res) => {
+router.get('/projectFormRender/:userId', async (req, res) => {
   try {
-    res.render('projectForm');
+    res.render('projectForm',{
+      user_id: req.params.userId,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/activitieFormRender/:projectId', async (req, res) => {
+router.get('/activitieFormRender/:projectId/:userId', async (req, res) => {
   try {
+    const userId = req.params.userId;
     //Get project with the projectId
     const projectData = await Project.findAll({      
 
@@ -44,7 +47,7 @@ router.get('/activitieFormRender/:projectId', async (req, res) => {
     ];
     //console.log('projects plain',projects)
     res.render('activitiesForm', {
-      projects,
+      projects, userId
     });
   } catch (err) {
     res.status(500).json(err);
@@ -68,8 +71,9 @@ router.get('/projectTableRender', async (req, res) => {
 router.get('/profileProjectTableRender/:profileId', async (req, res) => { 
   try {
     // Get all projects from a profile (user)
+    const profileId = req.params.profileId;
     const projectData = await Project.findAll({      
-
+    
       where: {
         userId: req.params.profileId,
       },
@@ -81,7 +85,7 @@ router.get('/profileProjectTableRender/:profileId', async (req, res) => {
     console.log('projects', projects);
 
     res.render('profileProjectsTable', {
-      projects,
+      projects, profileId
     });
   } catch (err) {
     res.status(500).json(err);
@@ -89,8 +93,9 @@ router.get('/profileProjectTableRender/:profileId', async (req, res) => {
 });
 
 //search activities from a specific project (user)
-router.get('/projectActivitiesTableRender/:projectId', async (req, res) => { 
+router.get('/projectActivitiesTableRender/:projectId/:userId', async (req, res) => { 
   try {
+     const userId = req.params.userId;
      //Get project with the projectId
      const projectData = await Project.findAll({      
       where: {
@@ -118,7 +123,7 @@ router.get('/projectActivitiesTableRender/:projectId', async (req, res) => {
     console.log('activities',activities);
 
     res.render('projectActivitiesTable',{
-      activities, projects
+      activities, projects,userId
     });
   } catch (err) {
     res.status(500).json(err);
@@ -183,6 +188,7 @@ router.get('/calendar', withAuth, (req, res) => {
   if (req.session.logged_in) {
     res.render('calendar', {
       logged_in: req.session.logged_in,
+      user_logged: req.session.user_id,
     });
     return;
   }

@@ -1,3 +1,21 @@
+<p style="display:none;">Usuario: <span id="user_Id">{{profileId}}</span> </p>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/calendar">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/projectFormRender/{{profileId}}">Add Projects</a>
+      <a class="nav-item nav-link disabled" href="/profileProjectTableRender/{{profileId}}">Read Projects</a>
+      <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
+    </div>
+  </div>
+</nav>
+
+
 <!-- Loop over each object in the projects array -->
 <table class="table" style="margin:15px;">
   <thead class="thead-dark">
@@ -14,7 +32,7 @@
       <th scope="row">{{project.projectId}}</th>
       <td>{{project.projectName}}</td>
       <td>{{project.projectDescription}}</td>
-      <td><a href="/projectActivitiesTableRender/{{project.projectId}}">Read</a> <a href="/activitieFormRender/{{project.projectId}}">Add</a> Delete</td>
+      <td><a href="/projectActivitiesTableRender/{{project.projectId}}/{{../profileId}}">Read</a> <a href="/activitieFormRender/{{project.projectId}}/{{../profileId}}">Add</a> Delete</td>
     </tr>
    {{/each}} 
   </tbody>

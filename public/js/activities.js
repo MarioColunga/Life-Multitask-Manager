@@ -4,6 +4,7 @@ async function saveActivity(){
   event.preventDefault();
   console.log('Into saveActivity');
   
+  const userId = document.getElementById('user_Id').innerHTML;
   const projectId = document.getElementById('projectId').innerHTML;
   const activityName = document.getElementById('inputActivityName').value.trim();
   const activityDescription = document.getElementById('inputActivityDescription').value.trim();  
@@ -19,7 +20,7 @@ async function saveActivity(){
       headers: { 'Content-Type': 'application/json' },
     });
     console.log('activitie Saved!!');
-    document.location = '/projectActivitiesTableRender/'+projectId;
+    document.location = '/projectActivitiesTableRender/'+projectId +  '/'+userId;
   }
   
 }
