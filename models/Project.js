@@ -23,8 +23,8 @@ Project.init(
     userId: { 
       type: DataTypes.INTEGER,
       references: {
-          model:"Profile",
-          key: "userId"
+          model:"User",
+          key: "user_id"
       }
     },
     deadLine: {
