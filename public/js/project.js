@@ -5,7 +5,7 @@ async function saveProject(){
   console.log('Into saveProject');
   const projectName = document.getElementById('inputProjectName').value.trim();
   const projectDescription = document.getElementById('inputProjectDescription').value.trim();
-  const userId = 1;
+  const userId = document.getElementById('user_Id').innerHTML;
   const deadLine = document.getElementById('inputProjectDeadLine').value.trim();
 
   if (projectName && projectDescription && userId && deadLine) {
