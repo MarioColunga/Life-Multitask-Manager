@@ -1,17 +1,10 @@
+<link rel='stylesheet' href='/css/calendar.css' />
 <p style="display:none;">User Id: <span id="user_Id">{{userId}}</span> </p>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/calendar">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/projectFormRender/{{userId}}">Add Projects</a>
-      <a class="nav-item nav-link" href="/profileProjectTableRender/{{userId}}">Read Projects</a>
-      <!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
-    </div>
+      <a class="nav-item nav-link active" href="/calendar">Return to Calendar <span class="sr-only"></span></a>
+      </div>
   </div>
 </nav>
 
@@ -26,21 +19,21 @@
 <table class="table" style="margin:15px;">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">Activity Id</th>
       <th scope="col">Name</th>
       <th scope="col">Description</th>
-      <th scope="col">Date</th>
-      <th scope="col">Options</th>
+      <th scope="col">Deadline</th>
+      <th scope="col">Start hour</th>
+      <th scope="col">End hour</th>
     </tr>
   </thead>
   <tbody>
     {{#each activities as |activity| }}
     <tr>
-      <th scope="row">{{activity.activityId}}</th>
-      <td>{{activity.activityName}}</td>
-      <td>{{activity.activityDescription}}</td>
-      <td>{{activity.activitydeadLine}}</td>
-      <td> Update Delete</td>
+      <td>{{activity.name}}</td>
+      <td>{{activity.description}}</td>
+      <td>{{activity.deadline}}</td>
+      <td>{{activity.start}}</td>
+      <td>{{activity.end}}</td>
     </tr>
    {{/each}} 
   </tbody>
